@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Avatar from '../../shared/component/IUElemens/Avatar'
 import './userItem.css';
 
 const UsersItem = props => {
@@ -7,7 +8,7 @@ const UsersItem = props => {
     <li className='user-item' >
       <div className='user-item__content' >
         <div className='user-item__image'>
-          <img src={props.image} alt={props.name} />
+          <Avatar image={props.image} alt={props.name} />
         </div>
         <div className='user-item_info'>
           <h2>{props.name}</h2>
