@@ -10,12 +10,12 @@ const Users = () => {
       image: 'https://a7.org/pictures/886/886286.jpg',
       places: 3
     },
-    // {
-    //   id: 1,
-    //   name: 'lila',
-    //   image: 'https://a7.org/pictures/368x223/961143.jpg',
-    //   places: 5
-    // }
+    {
+      id: 1,
+      name: 'lila',
+      image: 'https://a7.org/pictures/368x223/961143.jpg',
+      places: 5
+    }
   ]
 
   return (

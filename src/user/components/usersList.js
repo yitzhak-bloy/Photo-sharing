@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Card from '../../shared/component/IUElemens/Card'
 import './usersList.css';
 import UserItem from './userItem'
 
@@ -7,7 +8,9 @@ const UsersList = props => {
   if (props.items.length === 0) {
     return (
       <div className='center' >
-        <h1>no found any user!</h1>
+        <Card>
+          <h1>no found any user!</h1>
+        </Card>
       </div>
     )
   }
