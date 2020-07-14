@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '../../shared/components/UIElements/Card';
-import PlaceItem from './PlaceItem';
+import PlaceItem from './PlaceItem'
 import './PlaceList.css';
 
 const PlaceList = props => {
@@ -25,7 +25,7 @@ const PlaceList = props => {
           image={place.imageUrl}
           title={place.title}
           description={place.description}
-          eddress={place.address}
+          address={place.address}
           creatorId={place.creator}
           coordinates={place.location}
         />

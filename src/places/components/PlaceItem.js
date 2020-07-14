@@ -25,4 +25,4 @@ const PlaceItem = props => {
   )
 }
 
-export default PlaceList;
+export default PlaceItem;
