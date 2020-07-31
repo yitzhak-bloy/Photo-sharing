@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 
 import Input from'../../shared/components/FormElements/Input';
-import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
+import { 
+  VALIDATOR_REQUIRE, 
+  VALIDATOR_MINLENGTH 
+} from '../../shared/util/validators';
 import './NewPlace.css';
 
 const NewPlace = () => {
