@@ -10,7 +10,8 @@ import { useForm } from '../../shared/hooks/form-hook';
 import './PlaceForm.css';
 
 const NewPlace = () => {
-  const [formState, inputHandler] = useForm({
+  const [formState, inputHandler] = useForm(
+    {
       title: {
         value: '',
         isValid: false
@@ -19,18 +20,18 @@ const NewPlace = () => {
         value: '',
         isValid: false
       },
-      addess: {
+      address: {
         value: '',
         isValid: false
       }
-    }, 
+    },
     false
   );
 
   const placeSubmitHandler = event => {
     event.preventDefault();
-    console.log(formState.inputs);
-  }
+    console.log(formState.inputs); // send this to the backend!
+  };
 
   return (
     <form className="place-form" onSubmit={placeSubmitHandler}>
@@ -56,7 +57,7 @@ const NewPlace = () => {
         element="input"
         label="Address"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Please enter a valid Address"
+        errorText="Please enter a valid address."
         onInput={inputHandler}
       />
       <Button type="submit" disabled={!formState.isValid}>
