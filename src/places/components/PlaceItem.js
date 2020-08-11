@@ -8,10 +8,24 @@ import './PlaceItem.css';
 
 const PlaceItem = props => {
   const [showMap, setShowMap] = useState(false);
-
+  const [showConfirmModel, setShowConfirmModel] = useState(false);
+ 
   const openMapHandler = () => setShowMap(true);
 
   const closeMapHandler = () => setShowMap(false);
+
+  const showDeleteWarningHandler = () => {
+    setShowConfirmModel(true);  
+  };
+
+  const cancelDeleteHandler = () => {
+    setShowConfirmModel(false);  
+  };
+
+  const confirmDeleteHandler = () => {
+    setShowConfirmModel(false);
+    console.log('deleting...')  
+  };
 
   return (
     <React.Fragment>
@@ -27,6 +41,22 @@ const PlaceItem = props => {
           <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
+      <Modal
+        show={showConfirmModel}
+        onCancel={cancelDeleteHandler} 
+        header='?האם אתה בטוח' 
+        footerClass="place-item__modal-actions" 
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelDeleteHandler}>ביטול</Button>
+            <Button danger onClick={confirmDeleteHandler} >מחיקה</Button>
+          </React.Fragment>
+        } 
+      >
+        <p>
+          האם אתה בטוח שברצונך למחוק? שים לב המיקום ימחק לצמיתות
+        </p>
+      </Modal>
       <li className="place-item">
         <Card className="place-item__content">
           <div className="place-item__image">
@@ -40,7 +70,7 @@ const PlaceItem = props => {
           <div className="place-item__actions">
             <Button inverse onClick={openMapHandler}>VIEW ON MAP</Button>
             <Button to={`/places/${props.id}`}>EDIT</Button>
-            <Button danger>DELETE</Button>
+            <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>
           </div>
         </Card>
       </li>
