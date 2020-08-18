@@ -15,43 +15,61 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/Auth-context';
 
 const App = () => {
-  const [isLoggedin, setIsLoggedin] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const login = useCallback(() => {
-    setIsLoggedin(true);
+    setIsLoggedIn(true);
   }, []);
  
   
   const logout = useCallback(() => {
-    setIsLoggedin(false);
+    setIsLoggedIn(false);
   }, []);
+
+  let routes;
+
+  if (isLoggedIn) {
+     routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <UserPlaces />
+        </Route>
+        <Route path="/places/new" exact>
+          <NewPlace />
+        </Route>
+        <Route path="/places/:placeId">
+          <UpdatePlace />
+        </Route>    
+        <Redirect to='/' />
+      </Switch>     
+     )
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <UserPlaces />
+        </Route>
+        <Route path="/Auth">
+          <Auth />
+        </Route>
+        <Redirect to='/auth' />
+      </Switch>     
+    )
+  }
 
   return (
     <AuthContext.Provider 
-      value={{ isLoggedIn: isLoggedin, login: login, logout: logout}} 
+      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout}} 
     >
       <Router>
         <MainNavigation />
-        <main>
-          <Switch>
-            <Route path="/" exact>
-              <Users />
-            </Route>
-            <Route path="/:userId/places" exact>
-              <UserPlaces />
-            </Route>
-            <Route path="/places/new" exact>
-              <NewPlace />
-            </Route>
-            <Route path="/places/:placeId">
-              <UpdatePlace />
-            </Route>
-            <Route path="/Auth">
-              <Auth />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
-        </main>
+        <main>{routes}</main>
       </Router>
     </AuthContext.Provider>
   );
