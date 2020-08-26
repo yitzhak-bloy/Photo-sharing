@@ -22,7 +22,7 @@ const getPlaceById = (req, res, next) => {
   });
 
   if (!place) {
-    throw new Error('Could not find a place for the provided id.', 404);
+    throw new HttpError('Could not find a place for the provided id.', 404);
   }
 
   res.json({ place }); // => { place } => { place: place }
@@ -36,11 +36,27 @@ const getPlaceByUserId = (req, res, next) => {
   });
 
   if (!place) {
-    return next(new Error('Could not find a place for the provided user id.', 404))
+    return next(new HttpError('Could not find a place for the provided user id.', 404))
   }
 
   res.json({ place });
 }
 
+const createPlace = (req, res, next) => {
+  const {title, description, location, address, creator} = req.body;
+  const createPlace = {
+    title,
+    description,
+    location,
+    address,
+    creator
+  };
+
+  DUMMY_PLACES.push(createPlace);
+
+  res.status(201).json({place: createPlace})
+};
+
 exports.getPlaceById = getPlaceById;
 exports.getPlaceByUserId = getPlaceByUserId;
+exports.createPlace = createPlace;
