@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 const HttpError = require('../models/http-error');
 
 let DUMMY_USERS = [
@@ -28,4 +30,25 @@ const getAllUsers = (req, res, next) => {
   res.json({ DUMMY_USERS });
 };
 
+
+const createUser = (req, res, next) => {
+  const {name, description, address} = req.body;
+  const createUser = {
+    id: uuidv4(),
+    name,
+    description,
+    address
+  };
+
+  DUMMY_USERS.push(createUser);
+
+  res.status(201).json({user: createUser})
+};
+
+const login = (req, res, next) => {
+  res.status(200).send('נכנסת בהצלחה')
+}
+
 exports.getAllUsers = getAllUsers;
+exports.createUser = createUser;
+exports.login = login;
