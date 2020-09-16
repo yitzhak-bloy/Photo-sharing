@@ -63,12 +63,13 @@ const createPlace = async (req, res, next) => {
   try {
     coordinates = await getCoordsForAddress(address);
   } catch (error) {
+    console.log('אין הצלחה!!!')
     return next(error);
   }
 
   // const title = req.body.title;
   const createdPlace = {
-    id: uuid(),
+    id: uuidv4(),
     title,
     description,
     location: coordinates,
