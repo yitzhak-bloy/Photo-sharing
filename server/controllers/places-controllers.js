@@ -19,6 +19,7 @@ let DUMMY_PLACES = [
   }
 ];
 
+
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid; // { pid: 'p1' }
 
@@ -44,8 +45,6 @@ const getPlaceById = async (req, res, next) => {
   res.json({ place: place.toObject({getters: true}) }); // => { place } => { place: place }
 };
 
-// function getPlaceById() { ... }
-// const getPlaceById = function() { ... }
 
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
@@ -70,6 +69,7 @@ const getPlacesByUserId = async (req, res, next) => {
   res.json({ places: places.map(place => place.toObject({ getters: true })) });
 };
 
+
 const createPlace = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -86,7 +86,6 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  // const title = req.body.title;
   const createdPlace = new Place({
     title,
     description,
@@ -105,12 +104,12 @@ const createPlace = async (req, res, next) => {
     );
     return next(error);
   }
-   
 
   res.status(201).json({ place: createdPlace });
 };
 
-const updatePlace = (req, res, next) => {
+
+const updatePlace = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     throw new HttpError('Invalid inputs passed, please check your data.', 422);
@@ -119,15 +118,33 @@ const updatePlace = (req, res, next) => {
   const { title, description } = req.body;
   const placeId = req.params.pid;
 
-  const updatedPlace = { ...DUMMY_PLACES.find(p => p.id === placeId) };
-  const placeIndex = DUMMY_PLACES.findIndex(p => p.id === placeId);
-  updatedPlace.title = title;
-  updatedPlace.description = description;
+  let place;
+  try {
+    place = await Place.findById(placeId);
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not update place.', 
+      500
+    );
+    return next(error);
+  }
 
-  DUMMY_PLACES[placeIndex] = updatedPlace;
+  place.title = title;
+  place.description = description;
 
-  res.status(200).json({ place: updatedPlace });
+  try {
+    await place.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not update places.', 
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ place: place.toObject({ getters: true }) });
 };
+
 
 const deletePlace = (req, res, next) => {
   const placeId = req.params.pid;
