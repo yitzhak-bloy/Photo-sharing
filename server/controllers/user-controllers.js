@@ -82,13 +82,26 @@ const signup = async (req, res, next) => {
 };
 
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   const { email, password} = req.body;
 
-  const identifiedeUser = DUMMY_USERS.find(u => u.email === email);
+  let existingEmail;
+  try {
+    existingEmail = await User.findOne({ email: email })
+  } catch (err) { 
+    const error = new HttpError(
+      'Loggin in faild, please try again',
+      500
+    );
+    return next(error);
+  }
 
-  if (!identifiedeUser || identifiedeUser.password !== password) {
-    throw new HttpError('Surry, Could not find any user.', 401);  
+  if (!existingEmail || existingEmail.password !== password) {
+    const error = new HttpError(
+      'Invalid credentials, Could login you in.',
+      401
+    );
+    return next(error);
   }
 
   res.send('!נכנסת בהצלחה')
