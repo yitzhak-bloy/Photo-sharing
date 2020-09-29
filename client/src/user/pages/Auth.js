@@ -10,7 +10,7 @@ import {
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { AuthContext } from '../../shared/context/Auth-context';
-import './Auth.css';  
+import './Auth.css';
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -40,14 +40,15 @@ const Auth = () => {
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
     } else {
-      setFormData({
-        ...formState.inputs,
-        name: {
-          value: '',
-          isValid: false
-        }
-      }, 
-      false
+      setFormData(
+        {
+          ...formState.inputs,
+          name: {
+            value: '',
+            isValid: false
+          }
+        },
+        false
       );
     }
     setIsLoginMode(prevMode => !prevMode);
@@ -59,7 +60,7 @@ const Auth = () => {
     if (isLoginMode) {
     } else {
       try {
-        const response = await fetch('http://localhost:500/api/users/signup', {
+        const response = await fetch('http://localhost:5000/api/users/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -76,8 +77,7 @@ const Auth = () => {
       } catch (err) {
         console.log(err);
       }
-    };
-
+    }
     auth.login()
   };
 

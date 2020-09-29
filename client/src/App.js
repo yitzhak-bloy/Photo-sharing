@@ -42,7 +42,7 @@ const App = () => {
         </Route>
         <Route path="/places/:placeId">
           <UpdatePlace />
-        </Route>    
+        </Route> 
         <Redirect to='/' />
       </Switch>     
      )
