@@ -62,7 +62,6 @@ const Auth = () => {
   const authSubmitHandler = async event => {
     event.preventDefault();
     
-
     if (isLoginMode) {
       try {
         await sendRequset(
