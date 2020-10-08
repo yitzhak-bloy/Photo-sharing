@@ -7,7 +7,7 @@ export const useHttpClient = () => {
   const activeHttpRequests = useRef([]);
 
   const sendRequset = useCallback(
-    async (url, method = 'GET', headers = {}, body = null) => {
+    async (url, method = 'GET', body = null, headers = {} ) => {
     setIsLoading(true);
     const httpAbortCtrl = new AbortController();
     activeHttpRequests.current.push(httpAbortCtrl);
@@ -22,15 +22,21 @@ export const useHttpClient = () => {
 
         const responseData = await response.json();
 
+        activeHttpRequests.current = activeHttpRequests.current.filter(
+          reqCtrl => reqCtrl !== httpAbortCtrl
+        );
+
         if (!response.ok) {
           throw new Error(responseData.message);
         }
-
+        
+        setIsLoading(false);
         return responseData;
       } catch (err) {
         setError(err.message || 'Something went wrong, please try again.');
+        setIsLoading(false);
+        throw err;
       }
-      setIsLoading(false);
     }, []);
 
     const clearError = () => {
