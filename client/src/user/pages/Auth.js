@@ -64,22 +64,22 @@ const Auth = () => {
     
     if (isLoginMode) {
       try {
-        await sendRequset(
+        const responseData = await sendRequset(
           'http://localhost:5000/api/users/login', 
           'POST', 
           JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
-          }),
+          }), 
           {
             'Content-Type': 'application/json'
           }
         );
-        auth.login();
+        auth.login(responseData.user.id);
       } catch (err) {}
     } else {
       try {
-        await sendRequset(
+        const responseData =  await sendRequset(
           'http://localhost:5000/api/users/signup',
           'POST',
           JSON.stringify({
@@ -91,7 +91,7 @@ const Auth = () => {
             'Content-Type': 'application/json'
           }
         );
-        auth.login();
+        auth.login(responseData.user.id);
       } catch (err) {}
     }
   };
