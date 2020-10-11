@@ -19,7 +19,7 @@ const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
-  const {isLoading, error, sendRequset, clearError} = useHttpClient();
+  const {isLoading, error, sendRequest, clearError} = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -64,7 +64,7 @@ const Auth = () => {
     
     if (isLoginMode) {
       try {
-        const responseData = await sendRequset(
+        const responseData = await sendRequest(
           'http://localhost:5000/api/users/login', 
           'POST', 
           JSON.stringify({
@@ -79,7 +79,7 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
-        const responseData =  await sendRequset(
+        const responseData =  await sendRequest(
           'http://localhost:5000/api/users/signup',
           'POST',
           JSON.stringify({

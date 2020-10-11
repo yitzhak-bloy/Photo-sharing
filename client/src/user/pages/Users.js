@@ -8,12 +8,12 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 const Users = () => {
   const [loadedUsers, setLoadedUsers] = useState();
 
-  const {isLoading, error, sendRequset, clearError} = useHttpClient();
+  const {isLoading, error, sendRequest, clearError} = useHttpClient();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const responseData = await sendRequset(
+        const responseData = await sendRequest(
           'http://localhost:5000/api/users'
         );
         
@@ -21,7 +21,7 @@ const Users = () => {
       } catch(err) {}
     };
     fetchUsers()
-  }, [sendRequset])
+  }, [sendRequest])
 
   return (
     <React.Fragment >
