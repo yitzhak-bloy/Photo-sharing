@@ -79,7 +79,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image: 'https://files.geektime.co.il/wp-content/uploads/2020/09/photo_2020-09-12_18-20-01-1599925187.jpg',
+    image: req.file.path,
     creator
   });
 
