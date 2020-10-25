@@ -74,7 +74,8 @@ const UpdatePlace = () => {
           description: formState.inputs.description.value
         }), 
         {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: 'bearer ' +  auth.token
         }
       );
 
