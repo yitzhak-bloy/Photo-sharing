@@ -79,11 +79,11 @@ const signup = async (req, res, next) => {
 
   let token;
   try {
-    token = jwt(
-      { userId: createdUser.id, email: createdUser.email }, 
-      'supersecret_dont_share', 
+    token = jwt.sign(
+      { userId: createdUser.id, email: createdUser.email },
+      'supersecret_dont_share',
       { expiresIn: '1h' }
-    )
+    );
   } catch (err) {
     const error = new HttpError(
       'Signing up failed, please try again later.',
@@ -92,7 +92,9 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ userId: createdUser.id, email: createdUser.email, token: token });
+  res
+    .status(201)
+    .json({ userId: createdUser.id, email: createdUser.email, token: token });
 };
 
 const login = async (req, res, next) => {
@@ -104,7 +106,7 @@ const login = async (req, res, next) => {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
     const error = new HttpError(
-      'Loggin in failed, please try again later.',
+      'Logging in failed, please try again later.',
       500
     );
     return next(error);
@@ -139,14 +141,14 @@ const login = async (req, res, next) => {
 
   let token;
   try {
-    token = jwt(
-      { userId: existingUser.id, email: existingUser.email }, 
-      'supersecret_dont_share', 
+    token = jwt.sign(
+      { userId: existingUser.id, email: existingUser.email },
+      'supersecret_dont_share',
       { expiresIn: '1h' }
-    )
+    );
   } catch (err) {
     const error = new HttpError(
-      'logging in failed, please try again later.',
+      'Logging in failed, please try again later.',
       500
     );
     return next(error);
