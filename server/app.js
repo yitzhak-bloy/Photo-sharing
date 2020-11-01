@@ -13,7 +13,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/uploads/images', express.static(path.join('uploads', 'images')))
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -38,7 +38,7 @@ app.use((error, req, res, next) => {
   if (req.file) {
     fs.unlink(req.file.path, err => {
       console.log(err);
-    })
+    });
   }
   if (res.headerSent) {
     return next(error);
@@ -57,13 +57,3 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-
-
-
-// const doin = 248; // איחסון המספר 248 בתוך הערמת זיכרון 
-// const notDoin = 365; // איחסון המספר 365 בתוך הערימת זיכרון
-// /*
-// ,שליפת המספרים מתוך הערימת זיכרון על ידי השתמשות ב'כתובת' שלהם - שם המשתנה,
-// יצירת מקום איכסון חדש בזיכרון המכיל את המספר 613
-// */
-// const all = doin + notDoin;

@@ -2,15 +2,13 @@ const axios = require('axios');
 
 const HttpError = require('../models/http-error');
 
-const API_KEY = "AIzaSyCxrRe6TKSHCqzXLfrXqtyaZHV3o0sHncg";
+const API_KEY = 'AIzaSyCxrRe6TKSHCqzXLfrXqtyaZHV3o0sHncg';
 
 async function getCoordsForAddress(address) {
-  return {
-    lat: 40.7484474,
-    lng: -73.9871516
-  };
-  // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCxrRe6TKSHCqzXLfrXqtyaZHV3o0sHncg
-  
+  // return {
+  //   lat: 40.7484474,
+  //   lng: -73.9871516
+  // };
   const response = await axios.get(
     `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       address
