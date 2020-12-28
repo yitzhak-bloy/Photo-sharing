@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const HttpError = require('../models/http-error');
 
-const API_KEY = 'AIzaSyCxrRe6TKSHCqzXLfrXqtyaZHV3o0sHncg';
+const API_KEY = process.env.GOOGLE_API_KAY;
 
 async function getCoordsForAddress(address) {
   // return {

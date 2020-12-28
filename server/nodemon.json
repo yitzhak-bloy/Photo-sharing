@@ -1,0 +1,9 @@
+{
+  "env": {
+    "DB_USER": "manu",
+    "DB_PASSWORD": "nkfh1993",
+    "DB_NAME": "marn",
+    "GOOGLE_API_KAY": "AIzaSyCxrRe6TKSHCqzXLfrXqtyaZHV3o0sHncg",
+    "JWT_KAY": "supersecret_dont_share"
+  }
+}
