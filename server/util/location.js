@@ -16,6 +16,7 @@ async function getCoordsForAddress(address) {
   );
 
   const data = response.data;
+  console.log("🚀 ~ file: location.js ~ line 19 ~ getCoordsForAddress ~ data", data)
 
   if (!data || data.status === 'ZERO_RESULTS') {
     const error = new HttpError(
