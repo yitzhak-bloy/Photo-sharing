@@ -75,7 +75,7 @@ const UpdatePlace = () => {
         }), 
         {
           'Content-Type': 'application/json',
-          Authorization: 'bearer ' +  auth.token
+          Authorization: 'Bearer ' +  auth.token
         }
       );
 
