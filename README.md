@@ -1,4 +1,4 @@
-# Photo sharing app
+# Photo Sharing app
 
 **An app that allows you to see the photos that others have shared - including the location where the photo was taken, and share your photos with others.**
 
