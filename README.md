@@ -8,7 +8,7 @@ The application was built using the following technologies:
  - Express
  - MongoDB
  
- Deploying the application was made: <br >
+ Deploying the application was made with: <br >
  frontend:  Firebase <br >
  backend:  Heroku
 
