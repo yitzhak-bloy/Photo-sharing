@@ -9,8 +9,8 @@ The application was built using the following technologies:
  - MongoDB
  
  Deploying the application was made with: <br >
- frontend:  Firebase <br >
- backend:  Heroku
+ Firebase (frontend) <br >
+ Heroku (backend)
 
 The application was built as part of the main project of the course: [The MERN Fullstack Guide](https://www.udemy.com/course/react-nodejs-express-mongodb-the-mern-fullstack-guide/)<br >
 
